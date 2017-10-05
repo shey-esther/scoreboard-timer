@@ -28,7 +28,6 @@ class Timer extends React.Component {//class timer.
         <p> {this.state.date}</p>
         <button onClick={start}> start </button>
         <button onClick={reset}> reset </button>
-        
       </div>
     );
   }
@@ -80,11 +79,11 @@ class Model {//class model.
   notify() {
     this.callback();
   }
-  puntosTotale() {
+  puntosTotale() {//suma de los puntos totales.
     return model.players.map((e) => e.score).reduce((a, b) => { return a + b });
     // console.log(puntosTotale);
   }
-  intergrantes() {
+  intergrantes() {//suma de los integrantes que se añaden.
     return model.players.length;
   }
   decremento(index) {
@@ -124,10 +123,6 @@ const Header = ({ model }) => {
       </div>
       <div className="stopwatch">
         < Timer title="stopwatch" />
-        {/* <h2>atopht</h2>
-        <h1 className="stopwatch-time">0</h1>
-        <button >start</button>
-        <button>reset</button> */}
       </div>
     </div>
   )
@@ -180,7 +175,7 @@ const Application = ({ title, players }) => {
 }
 
 let model = new Model();
-let counter = 1;
+// let counter = 1;
 
 let render = () => {
   ReactDOM.render(<Application title="Scoreboard" players={model} />,

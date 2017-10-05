@@ -1,26 +1,34 @@
 'use strict'
 
-class Timer extends React.Component {
+class Timer extends React.Component {//class timer.
   constructor(props) {
     super(props);
     this.state = {
-      date: 0
+      date: 0//date inicializando en 0.
     }
   }
   render() {
     const { title } = this.props;
     const start = (e) => {
-      this.startTimer();
+      let value = e.target.textContent;
+      if (value == "start") {
+        this.startTimer();
+        e.target.textContent = 'stop';
+      } else {
+        e.target.textContent = 'start';
+        this.stopTimer();
+      }
     }
-    const stop = (e) => {
-      this.stopTimer();
+    const reset = (e) => {
+      this.resetTimer();
     }
     return (
       <div>
         <h2> {title} </h2>
-        <button onClick={start}> start </button>
-        <button onClick={stop}> stop </button>
         <p> {this.state.date}</p>
+        <button onClick={start}> start </button>
+        <button onClick={reset}> reset </button>
+        
       </div>
     );
   }
@@ -36,12 +44,18 @@ class Timer extends React.Component {
   stopTimer() {
     clearInterval(this.timer);
   }
+  resetTimer() {
+    this.setState({
+      date: 0,
+    })
+    clearInterval(this.timer);
+  }
 }
 
 
-class Model {
+class Model {//class model.
   constructor() {
-    this.players = [
+    this.players = [//array objeto
       {
         name: "Jim Hoskins",
         score: 31,
@@ -109,7 +123,7 @@ const Header = ({ model }) => {
         </table>
       </div>
       <div className="stopwatch">
-        < Timer title="Timer" />
+        < Timer title="stopwatch" />
         {/* <h2>atopht</h2>
         <h1 className="stopwatch-time">0</h1>
         <button >start</button>
@@ -124,7 +138,7 @@ const PlayerList = ({ model }) => {
     <div>{
       model.players.map((dato, index) => {
         return (
-          <div className="player">
+          <div key={index} className="player">
             <div className="player-name">{dato.name}</div>
             <div className="player-score counter">
               <button onClick={() => model.decremento(index)} className="counter-action decrement btn">-</button>
@@ -161,7 +175,6 @@ const Application = ({ title, players }) => {
       <Header model={players} />
       <PlayerList model={players} />
       <PlayerForm />
-
     </div>
   );
 }

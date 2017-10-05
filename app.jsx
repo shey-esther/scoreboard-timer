@@ -1,3 +1,5 @@
+'use strict'
+
 class Timer extends React.Component {
   constructor(props) {
     super(props);
@@ -16,13 +18,9 @@ class Timer extends React.Component {
     return (
       <div>
         <h2> {title} </h2>
-
         <button onClick={start}> start </button>
         <button onClick={stop}> stop </button>
-
         <p> {this.state.date}</p>
-
-        {/* <span> <TemporalComponent /> </span> */}
       </div>
     );
   }
@@ -30,7 +28,7 @@ class Timer extends React.Component {
   startTimer() {
     this.timer = setInterval(() => {
       this.setState({
-        date: this.state.date+1,
+        date: this.state.date + 1,
       });
     }, 1000);
   }
@@ -87,10 +85,10 @@ class Model {
   }
   agregar(name) {
     console.log(name.value);
-    if(this.input != null && this.input !=" "){
+    if (this.input != null && this.input != " ") {
       this.players.push({
-        name : this.input.value,
-        score : 0,
+        name: this.input.value,
+        score: 0,
       })
     }
     this.callback();
@@ -98,7 +96,7 @@ class Model {
   }
 }
 
-const Header = ({model}) => {
+const Header = ({ model }) => {
   // const puntosTotale = props.players.map((e) => e.score).reduce((a, b) => { return a + b });
   return (
     <div className="header">
@@ -111,7 +109,7 @@ const Header = ({model}) => {
         </table>
       </div>
       <div className="stopwatch">
-      < Timer title="Timer" />
+        < Timer title="Timer" />
         {/* <h2>atopht</h2>
         <h1 className="stopwatch-time">0</h1>
         <button >start</button>
@@ -148,9 +146,9 @@ let PlayerForm = React.createClass({
         <form onSubmit={e => {
           e.preventDefault();
           model.agregar(name);
-          }}>
-          <input type="text" onChange={e=>(model.input=e.target)}/>
-          <input  type="submit" />
+        }}>
+          <input type="text" onChange={e => (model.input = e.target)} />
+          <input type="submit" />
         </form>
       </div>
     )
@@ -163,7 +161,7 @@ const Application = ({ title, players }) => {
       <Header model={players} />
       <PlayerList model={players} />
       <PlayerForm />
-     
+
     </div>
   );
 }
